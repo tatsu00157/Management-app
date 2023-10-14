@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand d-lg-none" href="/">管理アプリ</a>
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="btn btn-info btn-sm btn-block mt-3 d-none d-lg-block" href="/create" role="button">新規作成</a>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item d-lg-none">
+                    <a class="nav-link" href="/">ホーム</a>
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+    <a class="btn btn-info btn-sm btn-block mt-3 d-lg-none" href="/create" role="button">新規作成</a>
+</nav>
+
+{% for post in posts %}
+<div class="container" ></div>
+<table class="table table-bordered table-responsive">
+    <thead>
+      <tr>
+        <th scope="col" class="text-center" style="width: 10%;">購入日</th>
+        <th scope="col" class="text-center" style="width: 20%;">商品名</th>
+        <th scope="col" class="text-center" style="width: 20%;">ジャンル</th>
+        <th scope="col" class="text-center" style="width: 10%;">詳細</th>
+        <th scope="col" class="text-center" style="width: 10%;">編集</th>
+        <th scope="col" class="text-center" style="width: 10%;">削除</th>
+        <th scope="col" class="text-center" style="width: 10%;">期限</th>
+        <th scope="col" class="text-center" style="width: 10%;">  </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row" class="text-center" style="width: 10%;">
+            {% if post.purchase %}
+                {{ post.purchase.date().strftime('%Y-%m-%d') }}
+            {% endif %}
+        </th>
+        <td class="text-center" style="width: 10%;">{{ post.title }}</td>
+        <td class="text-center" style="width: 10%;">{{ post.genre }}</td>
+        <td class="text-center" style="width: 10%;"><a class="btn btn-primary btn-sm" href="detail/{{ post.id }}" role="button">詳細</a></td>
+        <td class="text-center" style="width: 10%;"><a class="btn btn-warning btn-sm" href="update/{{ post.id }}" role="button">編集</a></td>
+        <td class="text-center" style="width: 10%;">
+            <a class="btn btn-danger btn-sm" href="javascript:void(0);" onclick="confirmDelete('{{ post.id }}');" role="button">削除</a>
+        </td>
+        <td class="text-center" style="width: 10%; height: 100px;">{{ post.due.date() }}</td>
+        <td class="text-center" style="width: 10%;">
+            {% if post.due.date() == today %}
+            <!-- モバイル用 -->
+            <div class= "alert alert-danger" style="width: 3em;" role="alert"> 期限日です</div>
+            {% elif post.due.date() < today %}
+            <div class= "alert alert-warning" role="alert">期限終了</div>
+            {% elif post.due.date() < yesterday %}
+            <div class= "alert alert-warning" role="alert"> 期限が近づいています</div>
+            {% else %}
+            <!-- モバイル用 -->
+            <!-- <div class= "alert alert-danger" style="width: 3em;" role="alert"> </div> -->
+           
+            {% endif %}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+{% endfor %}
+
+<script>
+    function confirmDelete(postId) {
+        if (confirm("本当に削除してもよろしいですか？")) {
+            window.location.href = "/delete/" + postId;
+        }
+    }
+</script>
+
+{% endblock %}

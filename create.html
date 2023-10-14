@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form class="mb-5" action="/" method="POST">
+                <div class="form-group pb-3">
+                    <label for="purchase">購入日</label>
+                    <input type="date" name="purchase" required class="form-control">
+                </div>
+                <div class="form-group pb-3">
+                    <label for="title">商品名</label>
+                    <input type="text" class="form-control" name="title">
+                </div>
+                <div class="form-group pb-3">
+                    <label for="genre">ジャンル</label>
+                <select name="genre" class="form-control">
+                    <option value="ゲーム">ゲーム</option>
+                    <option value="家電">家電</option>
+                    <option value="本">本</option>
+                    <option value="DVD、BD">DVD、BD</option>
+                    <option value="衣類">衣類</option>
+                    <option value="その他">その他</option>
+                </select>
+                </div>
+                <div class="form-group pb-3">
+                    <label for="detail">詳細</label>
+                    <input type="text" class="form-control" name="detail">
+                </div>
+                <div class="form-group pb-3">
+                    <label for="due">期限</label>
+                    <input type="date" name="due" required class="form-control">
+                </div>
+                <div class="text-center">
+                    <a class="btn btn-outline-primary" href="/" role="button">戻る</a>
+                    <button type="submit" class="btn btn-primary">作成</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

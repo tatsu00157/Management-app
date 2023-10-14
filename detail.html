@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1 class="m-5" style="text-align: center;">詳細</h1>
+<div class="card w-50 mb-3" style="margin: auto;" >
+    <div class="card-body">
+      <h2 class="card-title">{{ post.title }}</h2>
+      <h4 class="ml-3">{{ post.due.date() }}</h4>
+      <p>{{ post.detail }}</p>
+      <a class="btn btn-outline-primary" href="/" role="button">戻る</a>
+    </div>
+  </div>
+  
+{% endblock %}

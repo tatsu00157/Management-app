@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <title>管理アプリ</title>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <nav class="navber navber-light bg-light p-3">
+        <a class="navber-brand" href="/">管理アプリ</a>
+    </nav>
+    {% block body %}{% endblock %}
+</body>
+</html>
